@@ -17,11 +17,17 @@ void Atomic_Configuration::render(Shader * shader)
 {
 	glm::mat4 model(1.0f);
 
-	for (auto position : positions)
+	for (unsigned int i = 0; i < positions.size(); ++i)
 	{
+		glm::vec3 position = positions[i];
+		std::string element = elements[i];
+		glm::vec3 color = ATOM_DICT[element];
+
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, position);
 		shader->set_mat4("model", model);
+
+		shader->set_vec3("object_color", color[0], color[1], color[2]);
 		bodies[0]->render();
 	}
 }
@@ -61,6 +67,7 @@ void Atomic_Configuration::read_xyz_file()
 		iss >> pos_y;
 		iss >> pos_z;
 
+		elements.push_back(atom_type);
 		positions.push_back(glm::vec3(pos_x, pos_y, pos_z));
 	}
 

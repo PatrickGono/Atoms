@@ -19,6 +19,7 @@ class Atomic_Configuration
 private:
 	std::string input_file_name;
 	std::vector<glm::vec3> positions;
+	std::vector<std::string> elements;
 	std::vector<std::unique_ptr<Body>> bodies;
 
 public:

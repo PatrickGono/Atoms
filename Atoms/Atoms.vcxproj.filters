@@ -18,9 +18,6 @@
     <ClCompile Include="Atoms.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Atom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Atomic_Configuration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Atom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

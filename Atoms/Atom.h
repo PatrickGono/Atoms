@@ -1,10 +1,6 @@
 #pragma once
-class Atom
-{
-public:
-	
+#include <string>
+#include <map>
+#include <GLM/glm.hpp>
 
-private:
-
-};
-
+extern std::map<std::string, glm::vec3>  ATOM_DICT;
