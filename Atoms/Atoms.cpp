@@ -47,7 +47,7 @@ int main()
 	last_time = glfwGetTime();
 
 
-	std::string filename{ "TiO2.xyz" };
+	std::string filename{ "H2O.xyz" };
 	Atomic_Configuration config(filename);
 
 	glm::vec3 directional_light_direction(-0.3f, -0.3f, 1.0f);

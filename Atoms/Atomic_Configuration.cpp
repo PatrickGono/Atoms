@@ -3,17 +3,10 @@
 
 
 
-Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file(file_name)
+Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file_name(file_name)
 {
-	positions.push_back(glm::vec3(1.0, 0.0, 0.0));
-
-	positions.push_back(glm::vec3(-1.0, 0.0, 0.0));
-
-	positions.push_back(glm::vec3(0.0, 1.0, 0.0));
-
-	positions.push_back(glm::vec3(0.0, -1.0, 0.0));
-
 	bodies.emplace_back(std::make_unique<Sphere>(0.2f));
+	read_xyz_file();
 }
 
 Atomic_Configuration::~Atomic_Configuration()
@@ -35,10 +28,42 @@ void Atomic_Configuration::render(Shader * shader)
 
 void Atomic_Configuration::read_xyz_file()
 {
-	// TODO:
+	std::ifstream input_file;
+	input_file.open(input_file_name, std::ios::in);
 
-	// open file_name
+	if (!input_file.is_open())
+	{
+		std::cout << input_file_name << " file not found!\n";
+		return;
+	}
 
-	// read in positions for each atom
+	std::string line;
+	unsigned int n_atoms{ 0 };
+
+	// read first line containing number of atoms
+	std::getline(input_file, line);
+	n_atoms = std::stoi(line);
+
+	// skip comment line
+	std::getline(input_file, line);
+
+	// read rest of file
+	std::string atom_type;
+	float pos_x, pos_y, pos_z;
+
+	while (std::getline(input_file, line))
+	{
+		std::istringstream iss(line);
+		std::string atom_type;
+
+		iss >> atom_type;
+		iss >> pos_x;
+		iss >> pos_y;
+		iss >> pos_z;
+
+		positions.push_back(glm::vec3(pos_x, pos_y, pos_z));
+	}
+
+	input_file.close();
 }
 
