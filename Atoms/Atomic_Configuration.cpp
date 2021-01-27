@@ -5,7 +5,7 @@
 
 Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file_name(file_name)
 {
-	bodies.emplace_back(std::make_unique<Sphere>(0.2f));
+	bodies.emplace_back(std::make_unique<Sphere>(0.25f));
 	read_xyz_file();
 }
 
@@ -17,17 +17,13 @@ void Atomic_Configuration::render(Shader * shader)
 {
 	glm::mat4 model(1.0f);
 
-	for (unsigned int i = 0; i < positions.size(); ++i)
+	for (auto atom : atoms)
 	{
-		glm::vec3 position = positions[i];
-		std::string element = elements[i];
-		glm::vec3 color = ATOM_DICT[element];
-
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, position);
+		model = glm::scale(model, glm::vec3(atom.radius));
+		model = glm::translate(model, atom.position);
 		shader->set_mat4("model", model);
-
-		shader->set_vec3("object_color", color[0], color[1], color[2]);
+		shader->set_vec3("object_color", atom.color.x, atom.color.y, atom.color.z);
 		bodies[0]->render();
 	}
 }
@@ -60,15 +56,21 @@ void Atomic_Configuration::read_xyz_file()
 	while (std::getline(input_file, line))
 	{
 		std::istringstream iss(line);
-		std::string atom_type;
+		std::string element;
 
-		iss >> atom_type;
+		iss >> element;
 		iss >> pos_x;
 		iss >> pos_y;
 		iss >> pos_z;
 
-		elements.push_back(atom_type);
-		positions.push_back(glm::vec3(pos_x, pos_y, pos_z));
+
+		float radius = ATOM_RADIUS_DICT[element];
+		glm::vec3 color = ATOM_COLOR_DICT[element];
+		glm::vec3 position = glm::vec3(pos_x, pos_y, pos_z);
+
+		Atom atom{ radius, color, position, element };
+
+		atoms.push_back(atom);
 	}
 
 	input_file.close();
