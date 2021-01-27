@@ -136,7 +136,7 @@ int Window::initialize()
 
 	// Handle keys + mouse input
 	create_callbacks();
-	glfwSetInputMode(main_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(main_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Allow modern extension features
 	glewExperimental = GL_TRUE;
