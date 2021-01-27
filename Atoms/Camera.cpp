@@ -60,7 +60,7 @@ void Camera::process_mouse_movement(float x_change, float y_change)
 void Camera::process_mouse_scroll(float z_change, GLfloat delta_time)
 {
 	GLfloat velocity = movement_speed * delta_time;
-	zoom = z_change * velocity * 0.1;
+	zoom = z_change * velocity * 0.1f;
 	//std::cout << zoom << "\n";
 	//position += zoom * front;
 }

@@ -28,7 +28,7 @@ void Cylinder::create_mesh()
 		// bottom edge
 		x = radius * cos(sector_angle);
 		y = radius * sin(sector_angle);
-		z = -height / 2.0f;
+		z = -0.5f * height;
 
 		vertices.push_back(x);
 		vertices.push_back(y);
@@ -45,7 +45,7 @@ void Cylinder::create_mesh()
 		n_vertices++;
 
 		// top edge
-		z = height / 2.0f;
+		z = 0.5f * height;
 
 		vertices.push_back(x);
 		vertices.push_back(y);

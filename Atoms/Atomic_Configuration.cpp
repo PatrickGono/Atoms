@@ -8,7 +8,7 @@ Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file
 	bodies.emplace_back(std::make_unique<Sphere>());
 	bodies.emplace_back(std::make_unique<Cylinder>());
 	read_xyz_file();
-	create_bonds(2.0f);
+	create_bonds(3.0f);
 }
 
 Atomic_Configuration::~Atomic_Configuration()

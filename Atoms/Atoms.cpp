@@ -19,26 +19,26 @@
 #include "Window.h"
 
 int n_frames{ 0 };
-double last_time{ 0.0f };
+float last_time{ 0.0f };
 float mix{ 0.0f };
 
 
 void countFPS()
 {
-	double currentTime = glfwGetTime();
+	float currentTime = (float)glfwGetTime();
 	n_frames++;
-	if (currentTime - last_time >= 1.0)
+	if (currentTime - last_time >= 1.0f)
 	{
-		std::cout << 1000.0 / n_frames << "ms / frame\n";
+		std::cout << 1000.0f / n_frames << "ms / frame\n";
 		n_frames = 0;
-		last_time += 1.0;
+		last_time += 1.0f;
 	}
 }
 
 int main()
 {
-	int screen_width{ 800 };
-	int screen_height{ 600 };
+	int screen_width{ 1920 };
+	int screen_height{ 1080 };
 	Window window(screen_width, screen_height);
 	window.initialize();
 
@@ -56,10 +56,8 @@ int main()
 
 	while (!window.get_should_close())
 	{
-		//process_input(window);
-
-		double now_time = glfwGetTime();
-		double delta_time = now_time - last_time;
+		float now_time = glfwGetTime();
+		float delta_time = now_time - last_time;
 		last_time = now_time;
 		countFPS();
 
