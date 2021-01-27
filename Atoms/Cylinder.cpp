@@ -13,7 +13,7 @@ void Cylinder::create_mesh()
 	std::vector<unsigned int> indices;
 
 	float x, y, z, nx, ny, nz;
-	float radius = 0.1f;
+	float radius = 1.0f;
 	float height = 1.0f;
 	float inv_radius = 1.0f / radius;
 	float sector_angle;

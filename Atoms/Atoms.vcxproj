@@ -182,6 +182,7 @@
     <ClInclude Include="Atom.h" />
     <ClInclude Include="Atomic_Configuration.h" />
     <ClInclude Include="Body.h" />
+    <ClInclude Include="Bond.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CommonValues.h" />
     <ClInclude Include="Cylinder.h" />

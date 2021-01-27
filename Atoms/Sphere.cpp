@@ -14,7 +14,7 @@ void Sphere::create_mesh()
 	std::vector<unsigned int> indices;
 
 	float x, y, z, nx, ny, nz;
-	float radius = 0.25f;
+	float radius = 1.0f;
 	float inv_radius = 1.0f / radius;
 	float stack_angle, sector_angle;
 
