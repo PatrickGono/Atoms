@@ -12,6 +12,7 @@
 #include "Atom.h"
 #include "CommonValues.h"
 #include "Sphere.h"
+#include "Cylinder.h"
 #include "Shader.h"
 
 class Atomic_Configuration

@@ -5,7 +5,8 @@
 
 Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file_name(file_name)
 {
-	bodies.emplace_back(std::make_unique<Sphere>(0.25f));
+	bodies.emplace_back(std::make_unique<Sphere>());
+	bodies.emplace_back(std::make_unique<Cylinder>());
 	read_xyz_file();
 }
 
@@ -17,6 +18,7 @@ void Atomic_Configuration::render(Shader * shader)
 {
 	glm::mat4 model(1.0f);
 
+	// handle atoms
 	for (auto atom : atoms)
 	{
 		model = glm::mat4(1.0f);
@@ -26,6 +28,9 @@ void Atomic_Configuration::render(Shader * shader)
 		shader->set_vec3("object_color", atom.color.x, atom.color.y, atom.color.z);
 		bodies[0]->render();
 	}
+
+	// handle bonds
+	// TODO
 }
 
 void Atomic_Configuration::read_xyz_file()

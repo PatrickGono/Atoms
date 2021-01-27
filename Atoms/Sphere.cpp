@@ -1,6 +1,6 @@
 #include "Sphere.h"
 
-Sphere::Sphere(float radius) : radius(radius)
+Sphere::Sphere()
 {
 	create_mesh();
 }
@@ -14,7 +14,8 @@ void Sphere::create_mesh()
 	std::vector<unsigned int> indices;
 
 	float x, y, z, nx, ny, nz;
-	float inv_radius = 1.0 / radius;
+	float radius = 0.25f;
+	float inv_radius = 1.0f / radius;
 	float stack_angle, sector_angle;
 
 	unsigned int n_vertices = 0;

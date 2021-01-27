@@ -172,6 +172,7 @@
     <ClCompile Include="Atoms.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Body.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CommonValues.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sphere.h" />

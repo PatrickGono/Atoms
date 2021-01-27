@@ -7,13 +7,13 @@
 #include "CommonValues.h"
 #include "Body.h"
 
-class Sphere :
+class Cylinder :
 	public Body
 {
 private:
 
 public:
-	Sphere();
+	Cylinder();
 
 	void create_mesh();
 };
