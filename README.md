@@ -29,7 +29,7 @@ The molecule or configuration of atoms must be stored in the .xyz format. This i
 Once the input file is provided, the atomic structure / molecule is visualized.
 
 ## Example
-Water molecule:
+Water molecule (file H2O.xyz):
 
 `3`
 
@@ -47,7 +47,7 @@ Water molecule:
 
 
 
-Benzene molecule:
+Benzene molecule (file benzene.xyz:
 
 `12`
 
