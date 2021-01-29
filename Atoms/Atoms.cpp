@@ -77,15 +77,15 @@ void render_pass(Shader & shader, Camera & camera, glm::mat4 & projection, Windo
 
 int main()
 {
-	int screen_width{ 1920 };
-	int screen_height{ 1080 };
+	int screen_width{ 800 };
+	int screen_height{ 600 };
 
 	Window window(screen_width, screen_height);
 	window.initialize();
 
 	Shader shader("Shaders/shader.vert", "Shaders/shader.frag");
 
-	std::string filename{ "H2O.xyz" };
+	std::string filename{ "cocaine.xyz" };
 	Atomic_Configuration config(filename);
 
 	Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
