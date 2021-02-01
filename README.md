@@ -26,40 +26,10 @@ The molecule or configuration of atoms must be stored in the .xyz format. This i
 
 `...`
 
-Once the input file is provided, the atomic structure / molecule is visualized.
+The coordinates 'x', 'y' and 'z' are given in Angstrom. Once the input file is provided, the atomic structure / molecule can be visualized.
 
 ## Example
-Benzene molecule (file benzene.xyz):
-
-`12`
-
-`  `
-
-`  C        0.00000        1.40272        0.00000`
-
-`  H        0.00000        2.49029        0.00000`
-
-`  C       -1.21479        0.70136        0.00000`
-
-`  H       -2.15666        1.24515        0.00000`
-
-`  C       -1.21479       -0.70136        0.00000`
-
-`  H       -2.15666       -1.24515        0.00000`
-
-`  C        0.00000       -1.40272        0.00000`
-
-`  H        0.00000       -2.49029        0.00000`
-
-`  C        1.21479       -0.70136        0.00000`
-
-`  H        2.15666       -1.24515        0.00000`
-
-`  C        1.21479        0.70136        0.00000`
-
-`  H        2.15666        1.24515        0.00000`
-
-
+Benzene molecule (file Docs/benzene.xyz):
 
 <img src="Docs/benzene.png" width="600" height="468">
 
@@ -67,6 +37,6 @@ Benzene molecule (file benzene.xyz):
 
 
 
-TiO<sub>2</sub> crystal (file TiO2.xyz):
+TiO<sub>2</sub> crystal (file Docs/TiO2.xyz):
 
 <img src="Docs/TiO2.png" width="600" height="400">
