@@ -34,15 +34,15 @@ private:
 
 public:
 	Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
-	Camera(float posX = 0.0f, float posY = 0.0f, float posZ = 0.0f, float upX = 0.0f, float upY = 0.0f, float upZ = 0.0f, float yaw = YAW, float pitch = PITCH);
+	Camera(float pos_x = 0.0f, float pos_y = 0.0f, float pos_z = 0.0f, float up_x = 0.0f, float up_y = 0.0f, float up_z = 0.0f, float yaw = YAW, float pitch = PITCH);
 	~Camera();
 
 	glm::mat4 get_view_matrix();
 	glm::vec3 get_position() { return position; }
 
-	void process_keyboard(bool* keys, GLfloat deltaTime);
-	void process_mouse_movement(float xOffset, float yOffset);
-	void process_mouse_scroll(float yOffset, GLfloat deltaTime);
+	void process_keyboard(bool* keys, GLfloat delta_time);
+	void process_mouse_movement(float x_change, float y_change);
+	void process_mouse_scroll(float y_change, GLfloat delta_time);
 
 
 

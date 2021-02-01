@@ -25,8 +25,6 @@ void handle_input(Camera & camera, Window & window, float delta_time)
 	camera.process_keyboard(window.get_keys(), delta_time);
 	camera.process_mouse_movement(window.get_x_change(), window.get_y_change());
 	camera.process_mouse_scroll(window.get_z_change(), delta_time);
-	// TODO: figure out mouse scrolling
-	//camera.process_mouse_scroll()
 	return;
 }
 

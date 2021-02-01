@@ -59,23 +59,11 @@ void Window::handle_mouse_buttons(GLFWwindow* window, int button, int action, in
 	}
 }
 
-void Window::handle_mouse_scroll(GLFWwindow* window, double x_pos, double y_pos)
+void Window::handle_mouse_scroll(GLFWwindow* window, double x_offset, double y_offset)
 {
 	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-	the_window->z_change = the_window->last_z - y_pos;
-
-	the_window->last_z = y_pos;
-
-	if (the_window->z_change > 0)
-	{
-		std::cout << "Scrolling up\n";
-	}
-
-	if (the_window->z_change < 0)
-	{
-		std::cout << "Scrolling down\n";
-	}
+	the_window->z_change = y_offset;
 }
 
 

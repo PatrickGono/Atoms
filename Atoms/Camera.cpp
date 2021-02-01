@@ -59,10 +59,8 @@ void Camera::process_mouse_movement(float x_change, float y_change)
 
 void Camera::process_mouse_scroll(float z_change, GLfloat delta_time)
 {
-	GLfloat velocity = movement_speed * delta_time;
-	zoom = z_change * velocity * 0.1f;
-	//std::cout << zoom << "\n";
-	//position += zoom * front;
+	zoom = z_change * 0.5 * movement_speed;
+	position += zoom * front;
 }
 
 glm::mat4 Camera::get_view_matrix()
