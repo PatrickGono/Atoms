@@ -13,33 +13,14 @@
 
 #include "CommonValues.h"
 #include "Shader.h"
-#include "Sphere.h"
 #include "Atomic_Configuration.h"
 #include "Camera.h"
 #include "Window.h"
+#include "FPS_Counter.h"
 
-int n_frames{ 0 };
-float last_time{ 0.0f };
 
-void countFPS()
+void handle_input(Camera & camera, Window & window, float delta_time)
 {
-	float currentTime = (float)glfwGetTime();
-	n_frames++;
-	if (currentTime - last_time >= 1.0f)
-	{
-		std::cout << 1000.0f / n_frames << "ms / frame\n";
-		n_frames = 0;
-		last_time += 1.0f;
-	}
-}
-
-void handle_input(Camera & camera, Window & window)
-{
-	float now_time = glfwGetTime();
-	float delta_time = now_time - last_time;
-	last_time = now_time;
-	countFPS();
-
 	glfwPollEvents();
 	camera.process_keyboard(window.get_keys(), delta_time);
 	camera.process_mouse_movement(window.get_x_change(), window.get_y_change());
@@ -89,11 +70,22 @@ int main()
 	Atomic_Configuration config(filename);
 
 	Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-	last_time = glfwGetTime();
+
+	float now_time{ 0.0f };
+	float delta_time{ 0.0f };
+	float last_time = glfwGetTime();
+
+	FPS_Counter fps_counter;
 
 	while (!window.get_should_close())
 	{
-		handle_input(camera, window);
+		float now_time = glfwGetTime();
+		float delta_time = now_time - last_time;
+		last_time = now_time;
+		
+		fps_counter.count_fps();
+
+		handle_input(camera, window, delta_time);
 
 		glm::mat4 projection(1.0f);
 		projection = glm::perspective(glm::radians(45.0f), (float)screen_width / screen_height, 0.1f, 100.0f);
