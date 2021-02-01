@@ -36,7 +36,7 @@ void render_pass(Shader & shader, Camera & camera, Window & window, Atomic_Confi
 	shader.use_shader();
 
 	shader.set_mat4("view", camera.get_view_matrix());
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.get_buffer_width() / window.get_buffer_height(), 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(glm::radians(35.0f), window.get_buffer_width() / window.get_buffer_height(), 0.1f, 1000.0f);
 	shader.set_mat4("projection", projection);
 	shader.set_vec3("light_color", 1.0f, 1.0f, 1.0f);
 	glm::vec3 view_position = camera.get_position();
@@ -55,15 +55,15 @@ void render_pass(Shader & shader, Camera & camera, Window & window, Atomic_Confi
 
 int main()
 {
-	int screen_width{ 800 };
-	int screen_height{ 600 };
+	int screen_width{ 1200 };
+	int screen_height{ 800 };
 
 	Window window(screen_width, screen_height);
 	window.initialize();
 
 	Shader shader("Shaders/shader.vert", "Shaders/shader.frag");
 
-	std::string filename{ "cocaine.xyz" };
+	std::string filename{ "../Docs/cocaine.xyz" };
 	Atomic_Configuration config(filename);
 
 	Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);

@@ -16,38 +16,20 @@ Click (left mouse button) & drag to rotate view.
 ## Usage
 The molecule or configuration of atoms must be stored in the .xyz format. This is a human-readable, plain-text format with the following template:
 
-`number of atoms`
+`number_of_atoms`
 
-`comment line, ignored`
+`comment_line (ignored)`
 
-`chemical symbol     x   y   z`
+`chemical_symbol     x   y   z`
 
-`chemical symbol     x   y   z`
+`chemical_symbol     x   y   z`
 
 `...`
 
 Once the input file is provided, the atomic structure / molecule is visualized.
 
 ## Example
-Water molecule (file H2O.xyz):
-
-`3`
-
-`  `
-
-`H  0.7  0.7  0.0`
-
-`O  0.0  0.0  0.0`
-
-`H -0.7  0.7  0.0`
-
-
-<img src="Docs/H2O.png" width="500" height="340">
-
-
-
-
-Benzene molecule (file benzene.xyz:
+Benzene molecule (file benzene.xyz):
 
 `12`
 
@@ -79,4 +61,12 @@ Benzene molecule (file benzene.xyz:
 
 
 
-<img src="Docs/benzene.png" width="500" height="390">
+<img src="Docs/benzene.png" width="600" height="468">
+
+
+
+
+
+TiO<sub>2</sub> crystal (file TiO2.xyz):
+
+<img src="Docs/TiO2.png" width="600" height="400">
