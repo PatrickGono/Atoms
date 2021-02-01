@@ -14,13 +14,11 @@ void Window::handle_keys(GLFWwindow* window, int key, int code, int action, int 
 		if (action == GLFW_PRESS)
 		{
 			the_window->keys[key] = true;
-			std::cout << "Pressed key " << key << "\n";
 		}
 
 		if (action == GLFW_RELEASE)
 		{
 			the_window->keys[key] = false;
-			std::cout << "Released key " << key << "\n";
 		}
 	}
 }
@@ -30,6 +28,9 @@ void Window::handle_mouse(GLFWwindow* window, double x_pos, double y_pos)
 {
 	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
+	if (!the_window->left_mouse_button_pressed)
+		return;
+
 	if (the_window->mouse_first_moved)
 	{
 		the_window->last_x = x_pos;
@@ -37,7 +38,7 @@ void Window::handle_mouse(GLFWwindow* window, double x_pos, double y_pos)
 		the_window->mouse_first_moved = false;
 	}
 
-	the_window->x_change = x_pos - the_window->last_x;
+	the_window->x_change = the_window->last_x - x_pos;
 	the_window->y_change = the_window->last_y - y_pos;
 
 	the_window->last_x = x_pos;
@@ -50,12 +51,13 @@ void Window::handle_mouse_buttons(GLFWwindow* window, int button, int action, in
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
-		std::cout << "Left mouse button pressed\n";
+		the_window->left_mouse_button_pressed = true;
+		the_window->mouse_first_moved = true;
 	}
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
 	{
-		std::cout << "Left mouse button released\n";
+		the_window->left_mouse_button_pressed = false;
 	}
 }
 
@@ -83,6 +85,7 @@ Window::Window(GLint window_width, GLint window_height) : width(window_width), h
 	}
 
 	mouse_first_moved = true;
+	left_mouse_button_pressed = false;
 }
 
 Window::~Window()

@@ -10,7 +10,7 @@
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
 const float SPEED = 5.0f;
-const float SENSITIVITY = 0.1f;
+const float SENSITIVITY = 0.01f;
 const float ZOOM = 45.0f;
 
 
@@ -30,7 +30,8 @@ private:
 	float mouse_sensitivity;
 	float zoom;
 
-	void update_camera_vectors();
+	void initialize_camera_vectors();
+	void update_camera_vectors(glm::mat4 & transform);
 
 public:
 	Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);

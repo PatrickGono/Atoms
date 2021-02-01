@@ -21,6 +21,7 @@ private:
 	GLfloat y_change;
 	GLfloat z_change;
 	bool mouse_first_moved;
+	bool left_mouse_button_pressed;
 
 	static void handle_mouse(GLFWwindow* window, double x_pos, double y_pos);
 
