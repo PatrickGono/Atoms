@@ -94,5 +94,6 @@
     <None Include="Shaders\shader.vert">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

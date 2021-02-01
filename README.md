@@ -4,14 +4,14 @@ A simple OpenGL program that visualizes molecules and configurations of atoms.
 ## Requirements
 GLEW: http://glew.sourceforge.net/
 
-GLM: https://github.com/g-truc/glm
+GLM: https://github.com/g-truc/glm/
 
 GLFW: https://www.glfw.org/
 
 ## Controls
-WASD + mouse controls implemented currently.
+WASD to move up/left/down/right.
 
-Click & drag camera rotation yet to be implemented.
+Click (left mouse button) & drag to rotate view.
 
 ## Usage
 The molecule or configuration of atoms must be stored in the .xyz format. This is a human-readable, plain-text format with the following template:
