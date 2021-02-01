@@ -30,23 +30,22 @@ void handle_input(Camera & camera, Window & window, float delta_time)
 	return;
 }
 
-void render_pass(Shader & shader, Camera & camera, glm::mat4 & projection, Window & window, Atomic_Configuration & config)
+void render_pass(Shader & shader, Camera & camera, Window & window, Atomic_Configuration & config)
 {
 	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shader.use_shader();
 
-	float angle = (float)glfwGetTime();
-
 	shader.set_mat4("view", camera.get_view_matrix());
+	glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.get_buffer_width() / window.get_buffer_height(), 0.1f, 100.0f);
 	shader.set_mat4("projection", projection);
 	shader.set_vec3("light_color", 1.0f, 1.0f, 1.0f);
-	shader.set_vec3("object_color", 1.0f, 0.5f, 0.31f);
 	glm::vec3 view_position = camera.get_position();
 	shader.set_vec3("view_position", view_position.x, view_position.y, view_position.z);
 
 	glm::vec3 directional_light_direction(-0.3f, -0.3f, 1.0f);
+	float angle = (float)glfwGetTime();
 	directional_light_direction = glm::vec3(1.0f - std::sin(angle), 0.0, 1.0f - std::cos(angle));
 	shader.set_vec3("directional_light_direction", directional_light_direction.x, directional_light_direction.y, directional_light_direction.z);
 
@@ -87,9 +86,7 @@ int main()
 
 		handle_input(camera, window, delta_time);
 
-		glm::mat4 projection(1.0f);
-		projection = glm::perspective(glm::radians(45.0f), (float)screen_width / screen_height, 0.1f, 100.0f);
-		render_pass(shader, camera, projection, window, config);
+		render_pass(shader, camera, window, config);
 	}
 
 	glfwTerminate();
