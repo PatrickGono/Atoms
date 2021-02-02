@@ -8,7 +8,7 @@ Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file
 	bodies.emplace_back(std::make_unique<Sphere>());
 	bodies.emplace_back(std::make_unique<Cylinder>());
 	read_xyz_file();
-	create_bonds(2.0f);
+	create_bonds(BOND_CUTOFF);
 }
 
 Atomic_Configuration::~Atomic_Configuration()
@@ -84,6 +84,8 @@ void Atomic_Configuration::read_xyz_file()
 
 
 		float radius = ATOM_RADIUS_DICT[element];
+		radius = radius == 0.0f ? 0.3f : radius;
+
 		glm::vec3 color = ATOM_COLOR_DICT[element];
 		glm::vec3 position = glm::vec3(pos_x, pos_y, pos_z);
 
