@@ -56,31 +56,40 @@ void render_pass(Shader & shader, Camera & camera, Window & window, Atomic_Confi
 	return;
 }
 
-int main()
+int main(int argc, char * argv[])
 {
+	// create window
 	int screen_width{ 1200 };
 	int screen_height{ 800 };
-
 	Window window(screen_width, screen_height);
 	window.initialize();
 
+	// compile shader
 	Shader shader("Shaders/shader.vert", "Shaders/shader.frag");
 
-	std::string filename{ "../Docs/cocaine.xyz" };
+	// handle input .xyz file path as command line argument
+	std::string filename{ 0 };
+	if (argc < 2)
+		std::cout << "Supply .xyz file path as command line argument!\n";
+	else
+		filename = std::string(argv[1]);
+
+	// create atomic configuration from input file
 	Atomic_Configuration config(filename);
 
+	// set up camera
 	Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
-	float now_time{ 0.0f };
-	float delta_time{ 0.0f };
+	float now_time = glfwGetTime();
 	float last_time = glfwGetTime();
+	float delta_time{ 0.0f };
 
 	FPS_Counter fps_counter;
 
 	while (!window.get_should_close())
 	{
-		float now_time = glfwGetTime();
-		float delta_time = now_time - last_time;
+		now_time = glfwGetTime();
+		delta_time = now_time - last_time;
 		last_time = now_time;
 		
 		fps_counter.count_fps();

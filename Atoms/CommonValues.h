@@ -2,7 +2,7 @@
 #define PI 3.14159265f
 
 // bond distance cutoff
-#define BOND_CUTOFF 1.5f
+#define BOND_CUTOFF 1.9f
 
 
 // default camera values
