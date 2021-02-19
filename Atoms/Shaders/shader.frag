@@ -11,18 +11,22 @@ uniform vec3 view_position;
 
 vec3 compute_directional_light()
 {
+	// ambient lighting
 	float ambient_factor = 0.6;
 	vec3 ambient = ambient_factor * light_color;
 
+	// diffuse lighting
 	vec3 norm = normalize(normal);
 	float diffuse_factor = max(dot(normalize(directional_light_direction), norm), 0.0);
 	vec3 diffuse = diffuse_factor * light_color;
 
+	// specular lighting
 	vec3 view_direction = normalize(view_position - frag_pos);
 	vec3 reflection_direction = reflect(-normalize(directional_light_direction), norm);
 	float specular_strength = 0.5;
 	float specular_factor = pow(max(dot(view_direction, reflection_direction), 0.0), 32);
 	vec3 specular = specular_strength * specular_factor * light_color;
+
 	return ambient + diffuse + specular;
 }
 

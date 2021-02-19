@@ -13,7 +13,7 @@ class Shader
 {
 public:
 	unsigned int program_ID;
-	Shader(const char * vertexShaderPath, const char * fragmentShaderPath);
+	Shader(const char * vertex_shader_path, const char * fragment_shader_path);
 	~Shader();
 
 	void use_shader();
@@ -26,6 +26,6 @@ public:
 
 private:
 	std::string read_shader_file(const char * filePath);
-	void add_shader(unsigned int program, const char * shaderPath, GLenum shaderType);
+	void add_shader(unsigned int program, const char * shader_path, GLenum shader_type);
 };
 

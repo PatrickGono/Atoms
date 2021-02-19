@@ -5,8 +5,11 @@
 
 Atomic_Configuration::Atomic_Configuration(std::string & file_name) : input_file_name(file_name)
 {
+	// create meshes for sphere and cylinder
 	bodies.emplace_back(std::make_unique<Sphere>());
 	bodies.emplace_back(std::make_unique<Cylinder>());
+
+	// read positions and types of atoms, and evaluate bonds between them
 	read_xyz_file();
 	create_bonds(BOND_CUTOFF);
 }
@@ -72,6 +75,7 @@ void Atomic_Configuration::read_xyz_file()
 	std::string atom_type;
 	float pos_x, pos_y, pos_z;
 
+	// assumes the file to be a valid .xyz file
 	while (std::getline(input_file, line))
 	{
 		std::istringstream iss(line);
@@ -81,7 +85,6 @@ void Atomic_Configuration::read_xyz_file()
 		iss >> pos_x;
 		iss >> pos_y;
 		iss >> pos_z;
-
 
 		float radius = ATOM_RADIUS_DICT[element];
 		radius = radius == 0.0f ? 0.3f : radius;
@@ -100,6 +103,7 @@ void Atomic_Configuration::read_xyz_file()
 
 void Atomic_Configuration::create_bonds(float cutoff)
 {
+	// bond between any two atoms at a distance lower than cutoff consists of two stacked cylinders
 	for (auto atom1 : atoms)
 	{
 		for (auto atom2 : atoms)

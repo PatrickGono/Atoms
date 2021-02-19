@@ -1,14 +1,15 @@
 #include "Shader.h"
 
-Shader::Shader(const char * vertexShaderPath, const char * fragmentShaderPath)
+Shader::Shader(const char * vertex_shader_path, const char * fragment_shader_path)
 {
 	program_ID = glCreateProgram();
 
-	add_shader(program_ID, vertexShaderPath, GL_VERTEX_SHADER);
-	add_shader(program_ID, fragmentShaderPath, GL_FRAGMENT_SHADER);
+	add_shader(program_ID, vertex_shader_path, GL_VERTEX_SHADER);
+	add_shader(program_ID, fragment_shader_path, GL_FRAGMENT_SHADER);
 
 	glLinkProgram(program_ID);
 
+	// get error message in case of failure
 	int success;
 	char error_message[512];
 	glGetProgramiv(program_ID, GL_LINK_STATUS, &success);
@@ -34,14 +35,14 @@ void Shader::use_shader()
 }
 
 
-std::string Shader::read_shader_file(const char * filePath)
+std::string Shader::read_shader_file(const char * file_path)
 {
 	std::string code;
-	std::ifstream shader_file(filePath, std::ios::in);
+	std::ifstream shader_file(file_path, std::ios::in);
 
 	if (!shader_file)
 	{
-		std::cout << "Failed to open shader file: " << filePath << "\n";
+		std::cout << "Failed to open shader file: " << file_path << "\n";
 		return "";
 	}
 
@@ -55,9 +56,9 @@ std::string Shader::read_shader_file(const char * filePath)
 	return code;
 }
 
-void Shader::add_shader(unsigned int program, const char * shaderPath, GLenum shaderType)
+void Shader::add_shader(unsigned int program, const char * shader_path, GLenum shader_type)
 {
-	std::string shader_string = read_shader_file(shaderPath);
+	std::string shader_string = read_shader_file(shader_path);
 
 	const GLchar * code[1];
 	code[0] = shader_string.c_str();
@@ -66,19 +67,20 @@ void Shader::add_shader(unsigned int program, const char * shaderPath, GLenum sh
 	code_length[0] = strlen(shader_string.c_str());
 
 	unsigned int shader;
-	int success;
-	char error_message[512];
 
-	shader = glCreateShader(shaderType);
+	shader = glCreateShader(shader_type);
 	glShaderSource(shader, 1, code, code_length);
 	glCompileShader(shader);
 
+	// get error message in case of failure
+	int success;
+	char error_message[512];
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
 		glGetShaderInfoLog(shader, 512, nullptr, error_message);
 		std::cout << "Error compiling shader: " << error_message << "\n";
-		std::cout << "Shader location: " << shaderPath << "\n";
+		std::cout << "Shader location: " << shader_path << "\n";
 	}
 
 	glAttachShader(program, shader);

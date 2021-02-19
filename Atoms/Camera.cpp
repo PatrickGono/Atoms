@@ -1,9 +1,5 @@
 #include "Camera.h"
 
-
-
-
-
 Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch)
 	: movement_speed(SPEED), mouse_sensitivity(SENSITIVITY), zoom(ZOOM),
 	  yaw(yaw), pitch(pitch), position(pos), front(glm::vec3(0.0f, 0.0f, -1.0f))
@@ -23,6 +19,18 @@ Camera::Camera(float pos_x, float pos_y, float pos_z, float up_x, float up_y, fl
 
 Camera::~Camera()
 {
+}
+
+void Camera::initialize_camera_vectors()
+{
+	glm::vec3 new_front;
+	new_front.x = std::cos(glm::radians(yaw)) * std::cos(glm::radians(pitch));
+	new_front.y = std::sin(glm::radians(pitch));
+	new_front.z = std::sin(glm::radians(yaw)) * std::cos(glm::radians(pitch));
+	front = glm::normalize(new_front);
+
+	right = glm::normalize(glm::cross(front, world_up));
+	up = glm::normalize(glm::cross(right, front));
 }
 
 
@@ -53,6 +61,7 @@ void Camera::process_mouse_movement(float x_change, float y_change)
 
 	float angle = glm::sqrt(x_change * x_change + y_change * y_change);
 
+	// angle is the absolute value of the rotation angle, the direction is determined by the orientation of the rotation axis
 	if (angle > 0.0f)
 	{
 		glm::mat4 transformation = glm::mat4(1.0);
@@ -81,19 +90,6 @@ void Camera::update_camera_vectors(glm::mat4 & transform)
 
 	up = glm::normalize(glm::cross(right, front));
 }
-
-void Camera::initialize_camera_vectors()
-{
-	glm::vec3 new_front;
-	new_front.x = std::cos(glm::radians(yaw)) * std::cos(glm::radians(pitch));
-	new_front.y = std::sin(glm::radians(pitch));
-	new_front.z = std::sin(glm::radians(yaw)) * std::cos(glm::radians(pitch));
-	front = glm::normalize(new_front);
-
-	right = glm::normalize(glm::cross(front, world_up));
-	up = glm::normalize(glm::cross(right, front));
-}
-
 
 glm::mat4 Camera::get_view_matrix()
 {

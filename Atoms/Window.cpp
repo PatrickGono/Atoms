@@ -28,9 +28,11 @@ void Window::handle_mouse(GLFWwindow* window, double x_pos, double y_pos)
 {
 	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
+	// only handle mouse movement if the left mouse button is pressed
 	if (!the_window->left_mouse_button_pressed)
 		return;
 
+	// only register movement since the start of the mouse move
 	if (the_window->mouse_first_moved)
 	{
 		the_window->last_x = x_pos;
@@ -38,6 +40,7 @@ void Window::handle_mouse(GLFWwindow* window, double x_pos, double y_pos)
 		the_window->mouse_first_moved = false;
 	}
 
+	// movement is inverted (minus sign)
 	the_window->x_change = the_window->last_x - x_pos;
 	the_window->y_change = the_window->last_y - y_pos;
 
@@ -65,6 +68,7 @@ void Window::handle_mouse_scroll(GLFWwindow* window, double x_offset, double y_o
 {
 	Window* the_window = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
+	// since scrolling will move the camera in the z-direction, z_change is used to label vertical mouse / touchpad scrolling
 	the_window->z_change = y_offset;
 }
 
@@ -96,7 +100,7 @@ Window::~Window()
 
 int Window::initialize()
 {
-	// Initialize GLFW
+	// initialize GLFW
 	if (!glfwInit())
 	{
 		std::cout << "GLFW initialization failed!\n";
@@ -104,13 +108,13 @@ int Window::initialize()
 		return 1;
 	}
 
-	// Set OpenGL version to 3.3, with forward but no backward compatibility 
+	// set OpenGL version to 3.3, with forward but no backward compatibility 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-	// Create a window
+	// create a window
 	main_window = glfwCreateWindow(width, height, "atoms", nullptr, nullptr);
 	if (!main_window)
 	{
@@ -119,17 +123,17 @@ int Window::initialize()
 		return 1;
 	}
 
-	// Get buffer size information
+	// get buffer size information
 	glfwGetFramebufferSize(main_window, &buffer_width, &buffer_height);
 
-	// Set context for GLEW to use
+	// set context for GLEW to use
 	glfwMakeContextCurrent(main_window);
 
-	// Handle keys + mouse input
+	// create callback to handle keys + mouse input
 	create_callbacks();
 	glfwSetInputMode(main_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-	// Allow modern extension features
+	// allow modern extension features
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
@@ -140,11 +144,10 @@ int Window::initialize()
 		return 1;
 	}
 
-	// Enable depth testing
+	// enable depth testing
 	glEnable(GL_DEPTH_TEST);
 
-
-	// Set up Viewport size
+	// set up Viewport size
 	glViewport(0, 0, buffer_width, buffer_height);
 
 	glfwSetWindowUserPointer(main_window, this);

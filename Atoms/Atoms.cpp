@@ -11,7 +11,6 @@
 #include <GLM\gtc\matrix_transform.hpp>
 #include <GLM\gtc\type_ptr.hpp>
 
-#include "CommonValues.h"
 #include "Shader.h"
 #include "Atomic_Configuration.h"
 #include "Camera.h"
@@ -21,6 +20,7 @@
 
 void handle_input(Camera & camera, Window & window, float delta_time)
 {
+	// poll events from the window and pass mouse and keyboard input to the camera
 	glfwPollEvents();
 	camera.process_keyboard(window.get_keys(), delta_time);
 	camera.process_mouse_movement(window.get_x_change(), window.get_y_change());
@@ -30,21 +30,24 @@ void handle_input(Camera & camera, Window & window, float delta_time)
 
 void render_pass(Shader & shader, Camera & camera, Window & window, Atomic_Configuration & config)
 {
+	// clear scene, set background color
 	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shader.use_shader();
 
+	// set view and projection matrices
 	shader.set_mat4("view", camera.get_view_matrix());
 	glm::mat4 projection = glm::perspective(glm::radians(35.0f), window.get_buffer_width() / window.get_buffer_height(), 0.1f, 1000.0f);
 	shader.set_mat4("projection", projection);
-	shader.set_vec3("light_color", 1.0f, 1.0f, 1.0f);
+
+	// pass camera position to the shader
 	glm::vec3 view_position = camera.get_position();
 	shader.set_vec3("view_position", view_position.x, view_position.y, view_position.z);
 
+	// set light color and direction
+	shader.set_vec3("light_color", 1.0f, 1.0f, 1.0f);
 	glm::vec3 directional_light_direction(-0.3f, -0.3f, 1.0f);
-	float angle = (float)glfwGetTime();
-	directional_light_direction = glm::vec3(1.0f - std::sin(angle), 0.0, 1.0f - std::cos(angle));
 	shader.set_vec3("directional_light_direction", directional_light_direction.x, directional_light_direction.y, directional_light_direction.z);
 
 	config.render(&shader);
