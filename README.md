@@ -31,7 +31,7 @@ The coordinates `x`, `y` and `z` are given in Angstrom. Once the input file is p
 ## Example
 Benzene molecule (file Docs/benzene.xyz):
 
-<img src="Docs/benzene.png" width="600" height="468">
+<img src="Docs/benzene.png" width="960" height="540">
 
 
 
